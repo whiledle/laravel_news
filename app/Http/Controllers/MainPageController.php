@@ -12,7 +12,16 @@ class MainPageController extends Controller
     public function index()
     {
         $posts = Post::latest()->take(3)->get();
-        return view('posts', compact('posts'));
+        $tagsCollection = Post::select('id','tags')->where('comments', '>', 0)->orderBy('comments', 'desc')->take(4)->get();
+        $tagsUnique = [];
+        foreach ($tagsCollection as $values) {
+            $tagsArray = explode(',', $values->tags);
+            foreach ($tagsArray as $tag) {
+                $tagsUnique[] = $tag;
+            }
+        }
+        $tagsUnique = array_unique($tagsUnique);
+        return view('posts', compact('posts', 'tagsUnique'));
     }
 
     public function createPosts(): void
@@ -21,11 +30,13 @@ class MainPageController extends Controller
             [
                 'title' => '"КамАЗ" начнет полномасштабный выпуск грузовиков поколения K5 в феврале',
                 'text' => 'МОСКВА, 26 ноя - РИА Новости. "Камаз" с февраля начнет полномасштабный выпуск грузовиков поколения K5 с использованием компонентов, не зависящих от поставок из недружественных стран, сообщили в Минпромторге РФ.',
+                'comments' => 10,
                 'tags' => 'политика,в мире',
             ],
             [
                 'title' => 'Продажи первых новых моделей автомашин "Соллерс" начнутся в декабре',
                 'text' => 'ЕЛАБУГА (Татарстан), 26 ноя - РИА Новости. Продажи первых новых моделей легких коммерческих автомобилей "Соллерс" - "Арго" и "Атлант" - начнутся в декабре 2022 года, сообщил вице-премьер - глава Минпромторга РФ Денис Мантуров.',
+                'comments' => 1,
                 'tags' => 'спорт',
             ],
             [
@@ -36,6 +47,7 @@ class MainPageController extends Controller
             [
                 'title' => 'Эксперт предположил, сколько продлится экономический кризис в России',
                 'text' => 'МОСКВА, 26 ноя - РИА Новости. Экономический кризис, который переживает в настоящее время Россия, продлится примерно полтора года, заявил РИА Новости директор Института народнохозяйственного прогнозирования Российской Академии Наук Александр Широв.',
+                'comments' => 2,
                 'tags' => 'спорт',
             ],
             [
