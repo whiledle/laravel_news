@@ -15,7 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\MainPageController@index');
 Route::get('/create', 'App\Http\Controllers\MainPageController@createPosts');
+Route::get('/ajax-show', 'App\Http\Controllers\MainPageController@showPosts')->name('post.showPosts');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
