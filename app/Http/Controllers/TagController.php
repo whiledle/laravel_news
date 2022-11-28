@@ -9,10 +9,10 @@ class TagController extends Controller
 {
     public function show($tag)
     {
-        $tag = Tag::select('id')->where('name', $tag)->firstOrFail();
-        if ($tag) {
-            $posts = $tag->posts;
-            return view('tag.show', compact('posts'));
+        $tagId = Tag::select('id')->where('name', $tag)->firstOrFail();
+        if ($tagId) {
+            $posts = $tagId->posts;
+            return view('tag.show', compact('posts', 'tag'));
         }
     }
 }

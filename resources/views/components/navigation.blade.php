@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mb-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ route('post.index') }}">Новости</a>
         <div class="collapse navbar-collapse" id="navbarNav">
