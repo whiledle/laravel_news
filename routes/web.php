@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\MainPageController@index');
+Route::get('/', 'App\Http\Controllers\MainPageController@index')->name('post.index');
+Route::get('/posts/{post}', 'App\Http\Controllers\MainPageController@show')->name('post.show');
 Route::get('/create', 'App\Http\Controllers\MainPageController@createPosts');
 Route::get('/ajax-show', 'App\Http\Controllers\MainPageController@showPosts')->name('post.showPosts');
 

@@ -5,7 +5,9 @@
             @foreach($posts as $post)
                 <div class="media mb-3 pb-3" style="border-bottom: 1px solid #b1b1b1">
                     <div class="media-body">
-                        <h5 class="mt-0">{{$post->title}}</h5>
+                        <a href="{{ route('post.show', $post->id) }}">
+                            <h5 class="mt-0">{{$post->title}}</h5>
+                        </a>
                         <div class="posts-about">
                             <span>{{$post->created_at->format('d.m.Y')}}</span>
                             @foreach(explode(',', $post->tags) as $tag)

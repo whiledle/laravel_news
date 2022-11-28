@@ -21,7 +21,13 @@ class MainPageController extends Controller
             }
         }
         $tagsUnique = array_unique($tagsUnique);
-        return view('posts', compact('posts', 'tagsUnique'));
+        return view('post.index', compact('posts', 'tagsUnique'));
+    }
+
+    public function show(Post $post)
+    {
+        $tags = explode(',', $post->tags);
+        return view('post.show', compact('post', 'tags'));
     }
 
     public function createPosts(): void
