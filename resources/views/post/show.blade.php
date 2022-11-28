@@ -17,7 +17,7 @@
                     </div>
                     <div class="news-tags-container justify-content-center d-flex">
                         @foreach($tags as $tag)
-                            <a href="#" class="news-tag-container btn btn-secondary btn-sm me-3">
+                            <a href="{{ route('tag.show', $tag) }}" class="news-tag-container btn btn-secondary btn-sm me-3">
                                 <span>{{ $tag }}</span>
                             </a>
                         @endforeach

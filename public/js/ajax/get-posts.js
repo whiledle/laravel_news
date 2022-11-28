@@ -9,7 +9,7 @@ $('#show_more').click(function() {
             $('#show_more').attr('counter', counter);
             $.each(response.posts.data, function (key, value) {
                 var string = '';
-                var arr = value.tags.split(',');
+                var arr = value.post_tags.split(',');
                 $.each(arr, function(k, tag) {
                     string += '<span class="badge rounded-pill bg-secondary">'+ tag +'</span>';
                 });

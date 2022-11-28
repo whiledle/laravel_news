@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('text');
             $table->bigInteger('comments')->default(0);
-            $table->string('tags');
+            $table->string('post_tags');
             $table->timestamps();
             $table->softDeletes();
         });

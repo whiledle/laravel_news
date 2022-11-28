@@ -17,19 +17,6 @@
                     </div>
                 </div>
             @endforeach
-            <div class="more-button-container">
-                <button id="show_more" counter="2" type="button" class="btn btn-primary btn-sm">Показать еще</button>
-            </div>
-        </div>
-        <div class="col-4 tags-container">
-            <div class="tags-container-title px-2">
-                <h5>Обсуждаемые темы</h5>
-            </div>
-            <div class="list-group">
-                @foreach($tagsUnique as $tag)
-                    <a href="{{ route('tag.show', $tag) }}" class="list-group-item list-group-item-action">{{$tag}}</a>
-                @endforeach
-            </div>
         </div>
     </div>
 @endsection
