@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Post_tag;
 use App\Models\Tag;
@@ -12,7 +13,7 @@ class MainPageController extends Controller
     public function index()
     {
         $posts = Post::latest()->take(3)->get();
-        $tagsCollection = Post::select('id','post_tags')->where('comments', '>', 0)->orderBy('comments', 'desc')->take(4)->get();
+        $tagsCollection = Post::select('id','post_tags')->where('post_comments', '>', 0)->orderBy('post_comments', 'desc')->take(4)->get();
         $tagsUnique = [];
         foreach ($tagsCollection as $values) {
             $tagsArray = explode(',', $values->post_tags);
@@ -27,7 +28,8 @@ class MainPageController extends Controller
     public function show(Post $post)
     {
         $tags = explode(',', $post->post_tags);
-        return view('post.show', compact('post', 'tags'));
+        $comments = $post->comments;
+        return view('post.show', compact('post', 'tags', 'comments'));
     }
 
     public function createPosts(): void
@@ -36,13 +38,13 @@ class MainPageController extends Controller
             [
                 'title' => '"КамАЗ" начнет полномасштабный выпуск грузовиков поколения K5 в феврале',
                 'text' => 'МОСКВА, 26 ноя - РИА Новости. "Камаз" с февраля начнет полномасштабный выпуск грузовиков поколения K5 с использованием компонентов, не зависящих от поставок из недружественных стран, сообщили в Минпромторге РФ.',
-                'comments' => 10,
+                'post_comments' => 10,
                 'post_tags' => 'политика,в мире',
             ],
             [
                 'title' => 'Продажи первых новых моделей автомашин "Соллерс" начнутся в декабре',
                 'text' => 'ЕЛАБУГА (Татарстан), 26 ноя - РИА Новости. Продажи первых новых моделей легких коммерческих автомобилей "Соллерс" - "Арго" и "Атлант" - начнутся в декабре 2022 года, сообщил вице-премьер - глава Минпромторга РФ Денис Мантуров.',
-                'comments' => 1,
+                'post_comments' => 1,
                 'post_tags' => 'спорт',
             ],
             [
@@ -53,7 +55,7 @@ class MainPageController extends Controller
             [
                 'title' => 'Эксперт предположил, сколько продлится экономический кризис в России',
                 'text' => 'МОСКВА, 26 ноя - РИА Новости. Экономический кризис, который переживает в настоящее время Россия, продлится примерно полтора года, заявил РИА Новости директор Института народнохозяйственного прогнозирования Российской Академии Наук Александр Широв.',
-                'comments' => 2,
+                'post_comments' => 2,
                 'post_tags' => 'спорт',
             ],
             [
@@ -135,6 +137,20 @@ class MainPageController extends Controller
                 'tag_id' => '1',
             ],
         ];
+        $comments = [
+            [
+                'post_id' => 3,
+                'text' => 'Comment content post 3 (1)',
+            ],
+            [
+                'post_id' => 3,
+                'text' => 'Comment content post 3 (2)',
+            ],
+            [
+                'post_id' => 1,
+                'text' => 'Comment content post 1 (1)',
+            ],
+        ];
 
         foreach ($posts as $post) {
             Post::create($post);
@@ -144,6 +160,9 @@ class MainPageController extends Controller
         }
         foreach ($post_tag as $value) {
             Post_tag::create($value);
+        }
+        foreach ($comments as $comment) {
+            Comment::create($comment);
         }
         dd('ok');
     }

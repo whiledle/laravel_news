@@ -22,6 +22,15 @@
                             </a>
                         @endforeach
                     </div>
+                    <div class="news-comments-container mt-5">
+                        @foreach($comments as $comment)
+                            <div class="card mb-" style="max-width: 450px;">
+                                <div class="card-body">
+                                    {{ $comment->text }}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
