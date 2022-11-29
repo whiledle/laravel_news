@@ -11,7 +11,10 @@
                         <h3>{{ $post->title }}</h3>
                     </div>
                 </div>
-                <div class="news-content">
+                <div class="news-content mt-3">
+                    <div class="news-image-container w-25 mb-4">
+                        <img class="w-100" src="{{ asset('storage/images/' . $post->image) }}" alt="image">
+                    </div>
                     <div class="news-main-text">
                         <p>{{ $post->text }}</p>
                     </div>
