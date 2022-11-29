@@ -8,5 +8,9 @@
                 </li>
             </ul>
         </div>
+        <form class="d-flex" action="{{ route('post.search') }}" method="get">
+            <input name="search" class="form-control me-2" type="search" aria-label="Search" value="{{ request()->get('search') }}">
+            <button class="btn btn-outline-success" type="submit">Поиск</button>
+        </form>
     </nav>
 </div>

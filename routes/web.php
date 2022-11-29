@@ -18,6 +18,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function() {
     Route::get('/posts/{post}', 'ShowController')->name('post.show');
     Route::get('/ajax-show', 'ShowPostsController')->name('post.showPosts');
     Route::get('/create', 'CreatePostsController');
+    Route::get('/search', 'SearchController')->name('post.search');
 
     Route::group(['namespace' => 'Comment', 'prefix' => 'posts/{post}'], function() {
         Route::post('/comments', 'StoreController')->name('post.comments.store');
