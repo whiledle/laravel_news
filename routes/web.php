@@ -25,8 +25,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Post'], function() {
     });
 });
 
-
 Route::get('/tags/{tag}', 'App\Http\Controllers\TagController@show')->name('tag.show');
-
 Route::post('/comments', 'App\Http\Controllers\CommentController@store')->name('comments.store');
 
