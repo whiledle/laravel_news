@@ -22,9 +22,21 @@
                             </a>
                         @endforeach
                     </div>
+                    <div class="news-comments-add-container">
+                        <form action="{{ route('post.comments.store', $post->id) }}" method="post">
+                            @csrf
+                            <div class="mb-3" style="max-width: 450px;">
+                                <label for="comment_input" class="form-label">Введите комментарий</label>
+                                <textarea name="text" class="form-control" id="comment_input" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
                     <div class="news-comments-container mt-5">
                         @foreach($comments as $comment)
-                            <div class="card mb-" style="max-width: 450px;">
+                            <div class="card mb-2" style="max-width: 450px;">
                                 <div class="card-body">
                                     {{ $comment->text }}
                                 </div>

@@ -13,12 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\MainPageController@index')->name('post.index');
-Route::get('/posts/{post}', 'App\Http\Controllers\MainPageController@show')->name('post.show');
+Route::group(['namespace' => 'App\Http\Controllers\Post'], function() {
+    Route::get('/', 'IndexController')->name('post.index');
+    Route::get('/posts/{post}', 'ShowController')->name('post.show');
+    Route::get('/ajax-show', 'ShowPostsController')->name('post.showPosts');
+    Route::get('/create', 'CreatePostsController');
+
+    Route::group(['namespace' => 'Comment', 'prefix' => 'posts/{post}'], function() {
+        Route::post('/comments', 'StoreController')->name('post.comments.store');
+    });
+});
+
 
 Route::get('/tags/{tag}', 'App\Http\Controllers\TagController@show')->name('tag.show');
 
-
-Route::get('/create', 'App\Http\Controllers\MainPageController@createPosts');
-Route::get('/ajax-show', 'App\Http\Controllers\MainPageController@showPosts')->name('post.showPosts');
+Route::post('/comments', 'App\Http\Controllers\CommentController@store')->name('comments.store');
 
